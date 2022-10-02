@@ -1,0 +1,700 @@
+*****Create an app to display whether battery is charging or discharging.*****
+
+XML:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Kotlin:
+package com.example.satan
+
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.BatteryManager
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+import com.example.practical5san.R
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val t=findViewById<TextView>(R.id.textview) as TextView
+        val bs: Intent?= IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { IntentFilter ->
+            applicationContext.registerReceiver(null, IntentFilter)
+        }
+        val status: Int = bs?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)?:-1
+        val isCharging:Boolean = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL
+        if(isCharging)
+        {
+            t.text = "Charging"
+        }
+        else
+        {
+            t.text = "Discharging"
+        }
+    }
+}
+
+
+
+*****Create an app to display the battery level.*****
+
+XML:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Kotlin:
+package com.example.satan
+
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.BatteryManager
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+import com.example.practical5san.R
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val t=findViewById<TextView>(R.id.textview) as TextView
+        val bs: Intent?= IntentFilter(Intent.ACTION_BATTERY_CHANGED).let { IntentFilter ->
+            applicationContext.registerReceiver(null,IntentFilter)
+        }
+        val status: Int = bs?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)?:-1
+        val isCharging:Boolean = status == BatteryManager.BATTERY_STATUS_CHARGING ||
+                status == BatteryManager.BATTERY_STATUS_FULL
+        val level: Int = bs?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)?:-1
+        val scale:Int = bs?.getIntExtra(BatteryManager.EXTRA_STATUS, -1)?:-1
+        val bal:Int = (((level.toFloat())/(scale.toFloat()))*100.0f).toInt()
+
+        if(isCharging)
+        {
+            t.text = "Charging $bal"
+        }
+        else
+        {
+            t.text = "Discharging $bal"
+        }
+    }
+}
+
+
+
+*****Create an app to capture an image using Camera.*****
+
+XML code : 
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.387" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+XML Android manifest code : 
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapplication">
+
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
+
+
+Kotlin Code : 
+package com.example.myapplication
+
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.provider.MediaStore
+import android.widget.Button
+import android.widget.ImageView
+
+class MainActivity : AppCompatActivity() {
+    private val cameraRequest = 200
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val b1 = findViewById<Button>(R.id.button2) as Button
+        val iv = findViewById<ImageView>(R.id.imageView2) as ImageView
+
+        b1?.setOnClickListener {
+            try {
+                capturePhoto()
+            } catch (e: ActivityNotFoundException) {
+                // display error state to the user
+            }
+        }
+    }
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            val iv = findViewById<ImageView>(R.id.imageView2) as ImageView
+            if (resultCode == Activity.RESULT_OK && requestCode == cameraRequest && data != null) {
+                val photo: Bitmap = data?.extras?.get("data") as Bitmap
+                iv.setImageBitmap(photo)
+            }
+        }
+
+
+    fun capturePhoto() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, cameraRequest)
+    }
+}
+
+
+
+*****Create an app to display the x,y,z co-ordinates of the mobile phone
+ on a textview when the handset is rotated/moved*****
+
+KOTLIN CODE :
+package com.example.farmankazi0049
+
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+import org.w3c.dom.Text
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val list = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER)
+        val sensor : Sensor?=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        val se = object:SensorEventListener {
+            override fun onSensorChanged(p0: SensorEvent?) {
+                var v = p0?.values
+                var x = v?.get(0)
+                var y = v?.get(1)
+                var z = v?.get(2)
+                val tv = findViewById<TextView>(R.id.t1) as TextView
+                tv.text = "x = $x y = $y z = $z"
+            }
+
+            override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+            }
+        }
+        sensorManager.registerListener(se, list.get(0), SensorManager.SENSOR_DELAY_NORMAL)
+    }
+}
+
+
+
+*****Device Orientation Plugin*****
+
+AndroidMainfest.xml
+android:configChanges="orientation|screenSize">
+
+
+MainActivity.kt
+package com.example.portrait_landscape
+
+import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        if(newConfig.orientation==Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(this@MainActivity, "Portrait Mode", Toast.LENGTH_LONG).show()
+        }
+        else if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this@MainActivity, "Landscape Mode", Toast.LENGTH_LONG).show()
+        }
+    }
+}
+
+
+
+*****Write and Display the message*****
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.603" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+MainActivity.kt
+package com.example.portrait_landscape
+
+import android.content.res.Configuration
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.text.InputType
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val b1 = findViewById<Button>(R.id.button1) as Button
+        b1.setOnClickListener {
+            showPrompt()
+        }
+    }
+
+    fun showPrompt() {
+        val b : AlertDialog.Builder = AlertDialog.Builder(this)
+        b.setTitle("Enter text to display!")
+        val input = EditText(this)
+        input.setHint("Write something.....")
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        b.setView(input)
+        b.setPositiveButton("Okay"){_,_->
+            val m = input.text.toString()
+            Toast.makeText(this@MainActivity, "$m", Toast.LENGTH_LONG).show()
+        }
+        b.setNegativeButton("Cancel"){_,_->
+            Toast.makeText(this@MainActivity, "Thank you", Toast.LENGTH_LONG).show()
+        }
+        b.setCancelable(true)
+        b.show()
+    }
+}
+
+
+
+*****Create an app to send text in textbox from one activity to another*****
+
+XML 1 CODE
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.604" />
+
+    <EditText
+        android:id="@+id/ET1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+Kotlin 1 CODE
+package com.example.farman_kazi_0049
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+
+class MainActivity : AppCompatActivity() {
+    lateinit var send_button : Button
+    lateinit var send_text : EditText
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        send_button = findViewById(R.id.button1)
+        send_text = findViewById(R.id.ET1)
+        send_button.setOnClickListener {
+            val str = send_text.text.toString()
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            intent.putExtra("Message_Key", str)
+            startActivity(intent)
+        }
+    }
+}
+
+
+XML 2 CODE
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity2">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Kotlin CODE 2:
+package com.example.farman_kazi_0049
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class MainActivity2 : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main2)
+        val receiver_msg : TextView = findViewById(R.id.textView2)
+        val str = intent.getStringExtra("Message_Key")
+        receiver_msg.text = str
+    }
+}
+
+
+
+*****Create an app to select radio button and display it’s value on TextView*****
+
+XML CODE
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.36" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="263dp"
+        android:layout_height="98dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.208">
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VSIT" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIT" />
+
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="150dp"
+        android:layout_height="52dp"
+        android:text="App Development"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:text="Web Development"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.554" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.644" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="109dp"
+        android:layout_height="51dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Kotlin CODE
+package com.example.far_kazi_0049
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.*
+import java.lang.StringBuilder
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val rad = findViewById<RadioGroup>(R.id.radioGroup)
+        val t1 = findViewById<TextView>(R.id.textView)
+        rad.setOnCheckedChangeListener { _,_ ->
+            t1.text = findViewById<RadioButton>(rad.checkedRadioButtonId).text
+        }
+        val a = findViewById<CheckBox>(R.id.checkBox)
+        val b = findViewById<CheckBox>(R.id.checkBox2)
+        val btn = findViewById<Button>(R.id.button3)
+        val tv = findViewById<TextView>(R.id.textView2)
+        btn.setOnClickListener {
+            val r = StringBuilder()
+            if(a.isChecked) {
+                r.append(a.text)
+            }
+            if(b.isChecked){
+                r.append("\n"+b.text)
+            }
+            tv.text = r.toString()
+        }
+    }
+}
+
+
+
+*****Create an app to display the network information on TextView.*****
+
+XML CODE
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+KOTLIN CODE
+package com.example.networkinformation
+
+import android.content.Context
+import android.net.ConnectivityManager
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.TextView
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val netStatus=findViewById<TextView>(R.id.tv)
+        Thread(Runnable {
+            while (true) {
+                var conStant: String ="Not Connected"
+                val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val netInfo = cm.allNetworkInfo
+                for(ni in netInfo)
+                {
+                    if (ni.typeName.equals("WIFI", ignoreCase = true))
+                        if(ni.isConnected)conStant="WIFI"
+                    if(ni.typeName.equals("MOBILE",ignoreCase = true))
+                        if(ni.isConnected)conStant="MOBILE"
+
+                }
+                runOnUiThread{
+                    netStatus.text=conStant.toString()
+                }
+            }
+        }).start()
+
+
+    }
+}
+
+
+AndroidManifest.xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/><uses-permission android:name="android.permission.INTERNET"/>
