@@ -1,0 +1,360 @@
+1.acessing file
+
+
+a. Write a Python program to read an entire text file.
+
+#abc.txt
+Hello World In Python
+#f1.py
+f=open(‘abc.txt’,’r’)
+t=f.read()
+print(t)
+f.close()
+
+
+b. Write a Python program to append text to a file and display the text .
+
+f=open(‘abc.txt’,’a+’)
+f.write(‘Easy to learn\n’)
+f=open(‘abc.txt’,’r’)
+t=f.read()
+print(t)
+f.close()
+
+
+c.Write a Program to write the content to a text file
+
+f=open("abc.txt","w")
+x="hi"
+f.write(x)
+f.write("\n")
+f.write("vsit")
+print("content copied")
+f.close()
+d. Write a program to accept the name from user and write it in file
+f=open("abc1.txt","w")
+x=input("enter the name")
+f.write(x)
+print("content copied")
+f.close()
+
+
+e. Write a program to accept employee name and salary from user and write the content in file
+
+name=input("enter name")
+salary=input("enter salary")
+f=open("employee.txt","w")
+f.write(name + " " +salary )
+print("content copied")
+f.close()
+
+
+
+2.armstrong 
+
+
+num = 153
+order=3
+sum = 0
+order=3
+temp = num
+while temp > 0:
+ digit = temp % 10
+ sum += digit ** order
+ temp //= 10
+if num == sum:
+ print(num,"is an Armstrong number")
+else:
+ print(num,"is not an Armstrong number")
+
+
+
+
+3.database
+
+
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def upd():
+ con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+ cur=con.cursor()
+ str="update student set name='rupesh' where roll_no="+rollnoEntry.get()+""
+ cur.execute(str)
+ messagebox.showinfo("info msg","record updated")
+ con.commit()
+ con.close()
+def dele():
+ con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+ cur=con.cursor()
+ str="delete from student where roll_no="+rollnoEntry.get()+""
+ cur.execute(str)
+ messagebox.showinfo("info msg","record deleted")
+ con.commit()
+ con.close()
+def put (*args):# used to pass a variable number of arguments to a function
+ con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+ cur=con.cursor()
+ cur.execute("insert into student(roll_no,name)values('"+rollnoEntry.get()+"', '"+nameEntry.get()+"')")
+ messagebox.showinfo("info msg","Record inserted")
+ con.commit()
+ con.close()
+ def get():
+ con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+ cur=con.cursor()
+ cur.execute("select * from student")
+ results=cur.fetchall()
+ row=cur.fetchone()
+ messagebox.showinfo("infomsg",results)
+ con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='roll_no').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+Button(root,text='Display',command=get).grid(row=3,column=1)
+Label(root,text='roll_no').grid(row=4,column=0)
+rollnoEntry=Entry(root,width=7)
+rollnoEntry.grid(row=4,column=1)
+Button(root,text='delete',command=dele).grid(row=5,column=0)
+Button(root,text='update',command=upd).grid(row=5,column=1)
+root.mainloop()
+
+
+4.dictionary
+
+
+import operator
+d={1:'c',2:'b',3:'a'}
+print(d)
+s=sorted(d.items(),key=operator.itemgetter(0))
+print(s)
+s=sorted(d.items(),key=operator.itemgetter(0),reverse=True)
+print(s)
+
+
+dic1={1:10,2:20}
+dic2={3:30,4:40}
+dic3={5:50,6:60}
+dic1.update(dic2)
+dic1.update(dic3)
+print(dic1)
+
+my_dict = {'data1':100,'data2':50,'data3':40}
+print(sum(my_dict.values()))
+my_dict = {'data1':100,'data2':50,'data3':40}
+print(sum(my_dict.values()))
+
+
+
+5.fibonnaci
+
+
+nterms = int(input("How many terms? "))
+n1, n2 = 0, 1
+count = 0
+if nterms <= 0:
+   print("Please enter a positive integer")
+elif nterms == 1:
+   print("Fibonacci sequence upto",nterms,":")
+   print(n1)
+else:
+   print("Fibonacci sequence:")
+   while count < nterms:
+       print(n1)
+       nth = n1 + n2
+       n1 = n2
+       n2 = nth
+       count += 1
+
+
+6.geometry
+
+
+geometry.py
+import geometry
+import math
+def sphereArea(r):
+ return 4*math.pi*r**2
+def sphereVolume(r):
+ return 4*math.pi*r**3/3
+def sphereMetrics(r):
+ return sphereArea(r),sphereVolume(r)
+def circleArea(r):
+ return math.pi*r*r
+def squareArea(x):
+ return x**2
+
+demo.py
+import geometry
+def pointyShapeVolume(x,h,square):
+if square:
+ base=geometry.squareArea(x)
+else:
+ base=geometry.circleArea(x)
+ return h*base/3.0
+print(pointyShapeVolume(4,2.6,True))
+print(pointyShapeVolume(4,2.6,False))
+
+
+
+7.histogram
+
+
+def histogram(inlist):
+ for i in range(len(inlist)):
+  print(inlist[i]*'*')
+List=[4,9,7]
+histogram(List)
+
+
+8.length of string
+
+
+def callen(n):
+ count=0
+ for i in n:
+  count=count+1
+  return count
+print("length of list is ",callen([1,2,3,4,5]))
+print("length of string is ",callen("Janhavi"))
+
+
+9.palindrome
+
+
+n=int(input("Enter number:"))
+temp=n
+rev=0
+while(n>0):
+ dig=n%10
+ rev=rev*10+dig
+ n=n//10
+if(temp==rev):
+ print("The number is a palindrome!")
+else:
+ print("The number isn't a palindrome!")
+
+
+
+10.pangram
+
+
+import re
+def isPangram(inputSentence):
+ alphabetList = 'abcdefghijklmnopqrstuvwzyx'
+ alphabetCount = 0
+ if len(inputSentence) < 26:
+  return False
+ else:
+  inputSentence = re.sub('[^a-zA-Z]','',inputSentence)
+  inputSentence = inputSentence.lower()
+ for i in range(len(alphabetList)):
+  if alphabetList[i] in inputSentence:
+   alphabetCount = alphabetCount+1
+  if alphabetCount == 26:
+   return True
+  else:
+   return False
+print ("Sentence:")
+inputSentence = input()
+if (isPangram(inputSentence)):
+ print ("Input Sentence is a Pangram")
+else:
+ print ("Input Sentence is not a Pangram")
+
+
+
+11.store and retrive
+
+
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def put (*args):# used to pass a variable number of arguments to a function
+ con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+ cur=con.cursor()
+ cur.execute("insert into student(roll_no,name) values('"+rollnoEntry.get()+"', '"+nameEntry.get()+"')")
+ messagebox.showinfo("Record inserted")
+ con.commit()
+ con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='rollno').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+root.mainloop()
+
+
+
+12.vowel or consonant
+
+
+def vowelChecker (inputChar):
+if(inputChar == "a" or inputChar == "A" or
+   inputChar == "e" or inputChar == "E" or
+   inputChar == "i" or inputChar == "I" or
+   inputChar == "o" or inputChar == "O" or
+   inputChar == "u" or inputChar == "U"):
+ return "True"
+else:
+ return "False"
+print ("Enter the string to check")
+inputChar = input()
+if vowelChecker(inputChar) == "True":
+ print("The enterted character is Vowel")
+else:
+ print("The enterted character is not Vowel")
+
+
+
+13.widgets
+
+
+import tkinter as tk #importing tkinter module and aliasing it as tk
+w=tk.Tk() #creating an instance of the Tk
+w.title("1st GUI app") #Adding title to the window
+w.mainloop() #start GUI
+
+
+import tkinter as tk
+from tkinter import *
+w1=tk.Tk()
+w1.title('My App')
+l1=tk.Label(w1,text='Enter Number',bg='red',height=5,width=10,fg='white')
+l1.pack()#it organize widgets in blocks before placing them in parent window
+w1.mainloop()
+
+
+#use of button widget
+from tkinter import *
+root=Tk()
+def callback():
+print("click")
+b1=Button(root,text="one",bg="yellow",command=callback)
+b1.grid(row=0,column=1)
+root.mainloop()
+
+
+from tkinter import *
+w=Tk()
+def put():
+ print(E1.get())
+L1 = Label(w, text="User Name")
+L1.grid(row=1,column=1)
+E1 = Entry(w, bd =5)
+E1.grid(row=1,column=2)
+B1=Button(w,text='Insert',command=put)
+B1.grid(row=3,column=2)
+w.mainloop()
+
+
+

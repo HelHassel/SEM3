@@ -1,0 +1,574 @@
+ #Create a program that asks the user to enter their name and their age. Print out a message addressed to them that tells them the year that they will turn 100 years old.
+a=input("Enter your name: ")
+b=int(input("enter age"))
+c=(2022+100-b)
+print(c)
+#Enter the number from the user and depending on whether the number is even or odd, print out an appropriate message to the user.
+x=int(input("enter a number"))
+x1=0
+x2=1
+count=2
+if(x<=0):
+    print ( " enter a positive integer " )
+elif(x==1):
+    print("fibonacci series upto",x)
+    print(x1)
+else:
+    print("fibonacci series upto",x)
+    print(x1,",",x2)
+while(count<x):
+                a=x1+x2
+                print(a)
+                x1=x2
+                x2=a
+                count+=1
+#Write a program that reverses the user defined value and check whether that number is palindrome or not.
+x=int(input("enter a number"))
+temp=x
+rev=0
+while(x>0):
+    dig=x%10
+    rev=rev*10+dig
+    x=x//10
+if(temp==rev):
+    print ( " num is palindrome " )
+else:
+    print ( " num is not palindrome " )
+#Write a program to check the input value is Armstrong.
+x=int(input("enter a number"))
+temp=x
+sum=0
+rev=0
+while(temp>0):
+    dig=temp%10
+    sum=sum+dig**3
+    temp=temp//10
+if(x==sum):
+    print ( " num is armstrong " )
+else :
+    print ( " num is not armstrong " )
+#Write a program to print the factorial for a given number.
+x=int(input("enter a number"))
+fact=1
+a=1
+while(a<x):
+    a+=1
+    fact=fact*a
+print("factorial of",x,"is",fact)
+#Define a function that computes the length of a given list or string.
+def collen(n):
+    count = 0
+    for i in n:
+        count += 1
+    return count
+print("The lenght of the list is ", collen([1,2,3,4,5]))
+print("The lenght of the string is ", collen("Lucifer"))
+#Write a function that takes a character (i.e. a string of length 1) and returns True if it is a vowel, False otherwise.
+def vowel():
+    char=input("Enter Single Character:")
+    vowels='a,e,i,o,u,A,E,I,O,U'
+    if(char in vowels):
+        return True
+    else:
+        return False
+#A pangram is a sentence that contains all the letters of the English alphabet at least once, for example: The quick brown fox jumps over the lazy dog. Your task here is to write a function to check a sentence to see if it is a pangram or not.
+import string
+def check(sentence):
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    for letter in alphabet:
+        if letter not in sentence:
+            return print(sentence + ": is not a pangram")
+    return print(sentence + ": is a pangram")
+s = input("Enter a sentence: ")
+check(s.lower())
+
+#Write a program that takes two lists and returns True if they have at least one common member.
+def check(list1,list2):
+    result = False
+    for x in list1:
+        for y in list2:
+            if x==y:
+                result = True
+                return result
+print(check([1,2,3,4,5,6], [9,8,7,6,5,4]))
+#Write a Python program to print a specified list after removing the 0th, 2nd, 4th and 5th elements.
+list = ['Kamal', 'Nishant', "Om", 'Santosh', 'Amit']
+newlist = []
+for i in list:
+    if list.index(i) == 1 or list.index(i) == 3:
+        newlist.append(i)
+print(newlist)
+
+#Write a Python program to read an entire text file.
+f = open("1.txt","r")
+t = f.read()
+print(t)
+f.close()
+
+#Write a Python program to append text to a file and display the text.
+f = open("1.txt", "a+")
+f.write("Anything")
+f = open("1.txt", "r")
+t = f.read()
+print(t)
+f.close()
+#Write a Python program to write text to a file and display the text.
+f = open("1.txt", "w")
+f.write("Kamal Jaiswar")
+print("content copied")
+f.close()
+#Write a program to accept the name from user and write it in file
+f = open("1.txt", "w")
+x = input("Enter your name: ")
+f.write(x)
+print("content copied")
+f.close()
+#Write a program to accept employee name and salary from user and write the content in fil
+name = input ("Enter your name: ")
+salary = input("Enter your salary: ")
+f = open("1.txt", "w")
+f.write(name+" "+salary)
+print("content copied")
+f.close()
+#Write a python program to create a simple GUI.
+import tkinter as tk
+w = tk.Tk()
+w.title("1st GUI app")
+w.mainloop()
+#Write a Python program to create a GUI using pack(), grid() & label()
+import tkinter as tk
+from tkinter import *
+w1 = tk.Tk()
+w1.title("My App")
+l1 = tk.Label(w1, text='Pikachu',bg='yellow',height=10,width=19, fg='black')
+l1.pack()
+w1.mainloop()
+#Write a python program to use a button widget.
+from tkinter import *
+root = Tk()
+def callback():
+    print("clicked")
+b1 = Button(root, text="Click Here",bg="yellow", command=callback)
+b1.grid(row=0, column=1)
+root .mainloop()
+#Write a python program for entry widget.
+from tkinter import *
+w = Tk()
+def put():
+    print (E1.get())
+L1 = Label(w, text="Username")
+L1.grid(row=1, column=1)
+E1 = Entry(w, bd =5)
+E1.grid(row=1,column=2)
+B1 = Button(w, text="Insert", command=put)
+B1.grid (row=3, column=2)
+w.mainloop()
+#Open a new file in IDLE (“New Window” in the “File” menu) and save it as geometry.py in the directory where you keep the files you create for this course. Then copy the functions you wrote for calculating volumes and areas in the “Control Flow and Functions” exercise into this file and save it. Now open a new file and save it in the same directory.
+geometry.py
+import geometry
+import math
+def sphereArea(r):
+    return 4*math.pi*r**2
+def sphereVolume(r):
+    return 4*math.pi*r**3/3
+def sphereMetrics(r):
+    return sphereArea(r),sphereVolume(r)
+def circleArea(r):
+    return math.pi*r*r
+def squareArea(x):
+    return x**2
+demo.py
+import geometry
+def pointyShapeVolume(x,h,square):
+    if square:
+        base=geometry.squareArea(x)
+    else:
+        base=geometry.circleArea(x)
+        return h*base/3.0
+
+print(pointyShapeVolume(4,2.6,True))
+print(pointyShapeVolume(4,2.6,False))
+#Write a program to implement exception handling.
+try:
+    num=int(input("Enter the number"))
+    re=100/num
+except(ValueError,ZeroDivisionError):
+    print("something is wrong")
+else:
+    print("Result is : ",re)
+#Configure the widget with various options like: bg=”red”, family=”times”, size=18
+import tkinter as tk
+win=tk.Tk()
+win.title("Practical 9A")
+def redClick():
+    label.config(text="Helvetica Font")
+    label.config(bg="red")
+    label.config(font=("Helvetica",16))
+def greenClick():
+    label.config(text="Cambria Font")
+    label.config(bg="green")
+    label.config(font=("Cambria",18))
+def yellowClick():
+    label.config(text="Arial Font")
+    label.config(bg="yellow")
+    label.config(font=("Arial",14))
+label=tk.Label(win,text="Practical 9A",bg='white')
+label.pack()
+B1=tk.Button(win,text="Red Click",relief='raised',command=redClick)
+B1.pack(side="left")
+B2=tk.Button(win,text="Green Click",relief='raised',command=greenClick)
+B2.pack(side="left")
+B3=tk.Button(win,text="Yellow Click",relief='raised',command=yellowClick)
+B3.pack(side="left")
+win.mainloop()
+#Try to change the widget type and configuration options to experiment with other widget types like Message, Button, Entry, Checkbutton, Radiobutton, Scale etc.
+from tkinter import *
+def swap():
+    if v.get():
+        e.pack_forget()
+        mb.pack(anchor="w",side="right")
+        l2.config(text="use Menu below")
+        l2.config(bg="yellow")
+        l2.config(font=("Helvetica",16,"italic"))
+    else:
+        mb.pack_forget()
+        e.pack(anchor="w",side="left")
+        l2.config(text="use Entry box below")
+        l2.config(bg="green")
+        l2.config(font=("Cambria",16,"bold"))
+        e.focus()
+t=Tk()
+v=IntVar(t)
+c=Checkbutton(t,command=swap,text="select to use menu.",variable=v)
+c.pack(anchor="w")
+f1=Frame(t)
+l1=Label(f1,text="select menu item of your choice:")
+l1.pack(side="left")
+l2=Label(f1,text="use entrybox below.",bg="green",font=("Cambria",16,"bold"))
+l2.pack(side="top")
+f=Frame(f1)
+f.pack(side="left")
+e=Entry(f,width=35)
+mb=Menubutton(f,width=25,text="Veg",indicatoron=1,relief="sunken",anchor="w")
+m=Menu(mb,tearoff=0);mb.configure(menu=m)
+for s in "Veg nonVeg Chinese French".split():
+    m.add_command(label=s,command=lambda s=s:mb.configure(text=s))
+f.pack()
+f1.pack()
+#Design a class that store the information of  three students and display the same.
+class students:
+    count = 0
+    def __init__(self, name):
+        self.name = name
+        self.marks = []
+        students.count = students.count + 1
+    def enterMarks(self):
+        for i in range(3):
+            m = int(input("Enter the marks of %s in %d subject: "%(self.name, i+1)))
+            self.marks.append(m)
+    def display(self):
+        print (self.name, "got ", self.marks)
+name = input("Enter the name of Student:")
+s1 = students(name)
+s1.enterMarks()
+s1.display()
+print ("")
+name = input("Enter the name of Student:")
+s2 = students(name)
+s2.enterMarks()
+s2.display()
+print ("")
+name = input("Enter the name of Student:")
+s3 = students(name)
+s3.enterMarks()
+s3.display()
+s3.displayCount()
+print ("")
+#Write a Python program to Implement the concept of inheritance using python.
+class Vehicle:
+    def Vehicle_info(self):
+        print('Inside Vehicle class')
+class Car(Vehicle):
+    def car_info(self):
+        print('Inside Car class')
+car = Car()
+car.Vehicle_info()
+car.car_info()
+class Person:
+    def person_info(self, name, age):
+        print('Inside Person class')
+        print('Name:', name, 'Age:', age)
+class Company:
+    def company_info(self, company_name, location):
+        print('Inside Company class')
+        print('Name:', company_name, 'location:', location)
+class Employee(Person, Company):
+    def Employee_info(self, salary, skill):
+        print('Inside Employee class')
+        print('Salary:', salary, 'Skill:', skill)
+emp = Employee()
+emp.person_info('Jessa', 28)
+emp.company_info('Google', 'Atlanta')
+emp.Employee_info(12000, 'Machine Learning')
+class Vehicle:
+    def Vehicle_info(self):
+        print('Inside Vehicle class')
+class Car(Vehicle):
+    def car_info(self):
+        print('Inside Car class')
+class SportsCar(Car):
+    def sports_car_info(self):
+        print('Inside SportsCar class')
+s_car = SportsCar()
+s_car.Vehicle_info()
+s_car.car_info()
+s_car.sports_car_info()
+#Create a class called Numbers, which has a single class attribute called MULTIPLIER, and a constructor which takes the parameters x and y (these should all be numbers).Write a method called add which returns the sum of the attributes x and y.  Write a class method called multiply, which takes a single number parameter an and returns the product of a and MULTIPLIER.  Write a static method called subtract, which takes two number parameters, b and c, and returns b - c.
+class Numbers:
+    MULTIPLIER=3.5
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+    def add(self):
+        return self.x+self.y
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+    @property
+    def value(self):
+        return (self.x,self.y)
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+    def del_value(self):
+        del self.x
+        del self.y
+obj1=Numbers(10,20)
+print("add",obj1.add())
+print("mulyiply",Numbers.multiply(10))
+print("subtract ",Numbers.subtract(10,5))
+print("property ",obj1.value)
+print(obj1.set_value(100,200))
+print("property ",obj1.value)
+print(obj1.del_value())
+#class Numbers:
+    MULTIPLIER=3.5
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+    def add(self):
+        return self.x+self.y
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+    @property
+    def value(self):
+        return (self.x,self.y)
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+    def del_value(self):
+        del self.x
+        del self.y
+obj1=Numbers(10,20)
+print("add",obj1.add())
+print("mulyiply",Numbers.multiply(10))
+print("subtract ",Numbers.subtract(10,5))
+print("property ",obj1.value)
+print(obj1.set_value(100,200))
+print("property ",obj1.value)
+print(obj1.del_value())
+#class Numbers:
+    MULTIPLIER=3.5
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+    def add(self):
+        return self.x+self.y
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+    @property
+    def value(self):
+        return (self.x,self.y)
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+    def del_value(self):
+        del self.x
+        del self.y
+obj1=Numbers(10,20)
+print("add",obj1.add())
+print("mulyiply",Numbers.multiply(10))
+print("subtract ",Numbers.subtract(10,5))
+print("property ",obj1.value)
+print(obj1.set_value(100,200))
+print("property ",obj1.value)
+print(obj1.del_value())
+#class Numbers:
+    MULTIPLIER=3.5
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+    def add(self):
+        return self.x+self.y
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+    @property
+    def value(self):
+        return (self.x,self.y)
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+    def del_value(self):
+        del self.x
+        del self.y
+obj1=Numbers(10,20)
+print("add",obj1.add())
+print("mulyiply",Numbers.multiply(10))
+print("subtract ",Numbers.subtract(10,5))
+print("property ",obj1.value)
+print(obj1.set_value(100,200))
+print("property ",obj1.value)
+print(obj1.del_value())
+#class Numbers:
+    MULTIPLIER=3.5
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+    def add(self):
+        return self.x+self.y
+    @classmethod
+    def multiply(cls,a):
+        return cls.MULTIPLIER*a
+    @staticmethod
+    def subtract(b,c):
+        return b-c
+    @property
+    def value(self):
+        return (self.x,self.y)
+    def set_value(self,x,y):
+        self.x=x
+        self.y=y
+    def del_value(self):
+        del self.x
+        del self.y
+obj1=Numbers(10,20)
+print("add",obj1.add())
+print("mulyiply",Numbers.multiply(10))
+print("subtract ",Numbers.subtract(10,5))
+print("property ",obj1.value)
+print(obj1.set_value(100,200))
+print("property ",obj1.value)
+print(obj1.del_value())
+
+mysql
+#Design a simple database application that stores the records and retrieve the same.
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def put (*args):# used to pass a variable number of arguments to a function
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    cur.execute("insert into student(roll_no,name) values('"+rollnoEntry.get()+"', '"+nameEntry.get()+"')")
+    messagebox.showinfo("Record inserted")
+    con.commit()
+    con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='rollno').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+root.mainloop()
+#Design a simple database application that retrieve the data.
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def get():
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    cur.execute("select * from student")
+    results=cur.fetchall()
+    row=cur.fetchone()
+    messagebox.showinfo("infomsg",results)
+    con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='rollno').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Display',command=get).grid(row=3,column=1)
+root.mainloop()
+#Design a database application to that allows the user to add, delete and modify the records.
+from tkinter import *
+from tkinter import messagebox
+import pymysql
+def upd():
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    str="update student set name='rupesh' where roll_no="+rollnoEntry.get()+""
+    cur.execute(str)
+    messagebox.showinfo("info msg","record updated")
+    con.commit()
+    con.close()
+def dele():
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    str="delete from student where roll_no="+rollnoEntry.get()+""
+    cur.execute(str)
+    messagebox.showinfo("info msg","record deleted")
+    con.commit()
+    con.close()
+def put (*args):
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    cur.execute("insert into student(roll_no,name)values('"+rollnoEntry.get()+"', '"+nameEntry.get()+"')")
+    messagebox.showinfo("info msg","Record inserted")
+    con.commit()
+    con.close()
+def get():
+    con=pymysql.connect(user='root', password='tiger', host='localhost', database='sya')
+    cur=con.cursor()
+    cur.execute("select * from student")
+    results=cur.fetchall()
+    row=cur.fetchone()
+    messagebox.showinfo("infomsg",results)
+    con.close()
+root=Tk()
+root.title("insert data")
+rollnoEntry=Entry(root,width=7)
+nameEntry=Entry(root,width=7)
+rollnoEntry.grid(row=1,column=1)
+nameEntry.grid(row=2,column=1)
+Label(root,text='roll_no').grid(row=1,column=0)
+Label(root,text='name').grid(row=2,column=0)
+Button(root,text='Insert',command=put).grid(row=3,column=0)
+Button(root,text='Display',command=get).grid(row=3,column=1)
+Label(root,text='roll_no').grid(row=4,column=0)
+rollnoEntry=Entry(root,width=7)
+rollnoEntry.grid(row=4,column=1)
+Button(root,text='delete',command=dele).grid(row=5,column=0)
+Button(root,text='update',command=upd).grid(row=5,column=1)
+root.mainloop()
+
+
